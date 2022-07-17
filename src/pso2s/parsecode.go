@@ -117,7 +117,7 @@ func getImgSize(img []byte) (*image.Config, error) {
 	return &im, nil
 }
 
-func StartParse() {
+func StartParse(result_string *string) {
 
 	HttpClient, token, err := initCode()
 	if err != nil {
@@ -147,13 +147,13 @@ func StartParse() {
 				continue
 			}
 
-			// fmt.Println("debug: ", size.Width, " and ", size.Height)
 			if size.Width != 200 || size.Height != 40 {
 				// fmt.Printf("，但是图片尺寸不对，跳过。\n")
 				continue
 			}
 
 			fmt.Printf("你复制了验证码图片")
+
 			result, err := parseCode(HttpClient, token, img)
 
 			if err != nil {
@@ -164,6 +164,10 @@ func StartParse() {
 			if result != "请重试！" {
 				clipboard.Write(clipboard.FmtText, []byte(result))
 				fmt.Printf(", 已复制至剪切板\n")
+
+				if result_string != nil {
+					*result_string = "你复制了验证码图片, 识别结果为:" + result + ", 已复制至剪切板\n"
+				}
 			}
 
 		}
