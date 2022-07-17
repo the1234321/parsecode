@@ -1,4 +1,4 @@
-module yanzhengma
+module parsecode
 
 go 1.18
 
