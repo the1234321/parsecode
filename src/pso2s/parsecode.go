@@ -1,4 +1,4 @@
-package main
+package pso2s
 
 import (
 	"bytes"
@@ -117,7 +117,7 @@ func getImgSize(img []byte) (*image.Config, error) {
 	return &im, nil
 }
 
-func startParse() {
+func StartParse() {
 
 	HttpClient, token, err := initCode()
 	if err != nil {
@@ -168,8 +168,4 @@ func startParse() {
 
 		}
 	}
-}
-
-func main() {
-	startParse()
 }
